@@ -64,7 +64,7 @@ Installation
 
 Clone the repository
 
-git clone [https://github.com/your-username/coderun-compressor.git](https://github.com/your-username/coderun-compressor.git)
+git clone [https://github.com/SoimanVasile/coderun-compressor.git](https://github.com/SoimanVasile/coderun-compressor.git)
 
 
 Navigate to project folder
