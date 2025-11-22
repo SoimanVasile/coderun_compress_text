@@ -1,70 +1,116 @@
-# Getting Started with Create React App
+🗜️ Run-Length Text Compressor (CodeRun Edition)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Built for the CodeRun IT Marathon. A lossless text compression tool capable of handling standard ASCII, Unicode symbols, Emojis, and Asian characters efficiently.
 
-## Available Scripts
+📖 About The Project
 
-In the project directory, you can run:
+This project is a web-based compression tool that implements a variation of the Run-Length Encoding (RLE) algorithm. Unlike basic string manipulators, our engine is designed to handle UTF-8 multi-byte characters correctly.
 
-### `npm start`
+Most JavaScript string methods fail when splitting Emojis (surrogate pairs), but this tool uses iterator-based splitting to ensure that characters like "🔥" or "文" are treated as single units, preventing data corruption during compression.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Key Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+📉 Lossless Compression: Reduces file size for repetitive text sequences.
 
-### `npm test`
+🌏 Unicode Support: Fully supports Japanese/Chinese characters and Emojis (e.g., 🚀, 🤣).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+📊 Real-Time Metrics: Calculates Compression Ratio, Input/Output byte size, and Execution time in milliseconds.
 
-### `npm run build`
+📂 File Handling: Drag-and-drop support for .txt files.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+⚡ Performance: Uses TextEncoder for accurate byte-level measurement.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+⚙️ How It Works (The Algorithm)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The core logic resides in src/utils/compressionEngine.js.
 
-### `npm run eject`
+Compression Logic
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+We iterate through the string and count consecutive identical characters. The output format is [Character][Count];.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Example:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Input: aaabbbcccc
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Process:
 
-## Learn More
+Found 3 'a's
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Found 3 'b's
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Found 4 'c's
 
-### Code Splitting
+Output: a3;b3;c4;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The "Emoji" Challenge
 
-### Analyzing the Bundle Size
+In standard JavaScript, string.length returns the number of UTF-16 code units, not visual characters. An emoji like "😀" is actually 2 code units.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Bad approach: string.split('') breaks emojis into garbage characters.
 
-### Making a Progressive Web App
+Our approach: We use the Spread Operator [...raw_text]. This utilizes the string's iterator to correctly split by Code Points, keeping emojis intact.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+🚀 Getting Started
 
-### Advanced Configuration
+Follow these steps to run the project locally.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Prerequisites
 
-### Deployment
+Node.js installed on your machine.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+npm (Node Package Manager).
 
-### `npm run build` fails to minify
+Installation
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Clone the repository
+
+git clone [https://github.com/your-username/coderun-compressor.git](https://github.com/your-username/coderun-compressor.git)
+
+
+Navigate to project folder
+
+cd coderun-compressor
+
+
+Install dependencies
+
+npm install
+
+
+Run the application
+
+npm start
+
+
+The app will open in your browser at http://localhost:3000.
+
+📸 Usage
+
+Input: Type text into the left box OR drag & drop a .txt file.
+
+Compress: Click the green Comprimă button.
+
+Analyze: Check the "Metrici și Status" box to see how much space you saved.
+
+Decompress: Click Decomprimă to restore the original text from the compressed output.
+
+📂 Project Structure
+
+src/
+├── utils/
+│   └── compressionEngine.js  # Core RLE Algorithm (Compress/Decompress)
+├── CompressionTool.jsx       # Main Application Controller
+├── FileUploader.jsx          # Drag & Drop Component
+├── MetricsDisplay.jsx        # Stats Visualization
+├── App.js                    # Root Component
+└── index.js                  # Entry Point
+
+
+👥 The Team
+
+Built with 💻 and ☕ for CodeRun.
+
+Soiman Vasile-Cristian - Frontend & Logic
+
+Aerinei Ionut and Gramada Nicolae - Algorithm Optimization
+
